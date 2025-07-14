@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { navLinks } from "./constants/navLinks";
 import { User, X, Menu } from "lucide-react";
+import CTAButton from "../shared/CTAButton/CTAButton";
 
 function BoxNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +16,7 @@ function BoxNavbar() {
 
   return (
     <header className="bg-zinc-800 w-full py-8 px-4 md:px-10">
-      <div className="flex items-center gap-x-42 max-w-7xl mx-auto">
+      <div className="flex items-center justify-between gap-x-42 max-w-7xl mx-auto">
         {/* Logo */}
         <div className="flex items-center">
           <Image
@@ -48,7 +49,7 @@ function BoxNavbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-white hover:text-orange-500 font-semibold md:text-lg"
+                className="text-white hover:text-orange-500 font-semibold md:text-md text-lg"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
@@ -58,13 +59,7 @@ function BoxNavbar() {
 
           {/* Botão Área do Lojista */}
           <div className="mt-4 md:mt-0">
-            <button
-              className="flex items-center bg-orange-500 w-full h-10 text-white font-semibold rounded-xl cursor-pointer px-3 gap-x-2 shadow-lg hover:bg-orange-600"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <User size={24} />
-              Área do Lojista
-            </button>
+            <CTAButton label="Área do Lojista" Icon={User} onClick={()=> {setIsMenuOpen(false);}} className="w-full md:w-36"/>
           </div>
         </div>
       </div>
