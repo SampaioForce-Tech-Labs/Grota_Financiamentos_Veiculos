@@ -1,9 +1,10 @@
 import Image from "next/image";
+import BoxNavbar from "@/src/presentation/layout/Navbar/BoxNavbar";
 
 export default function Home() {
   return (
-    <div className="bg-amber-500">
-      tets
+    <div>
+      <BoxNavbar/>
     </div>
   );
 }
