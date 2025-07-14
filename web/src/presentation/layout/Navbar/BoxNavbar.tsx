@@ -1,49 +1,75 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import React from 'react'
-import Link from 'next/link'
-import { navLinks, socialLinks } from './constants/navLinks'
-import { Facebook, Instagram, Linkedin, User } from 'lucide-react'
-
-const iconComponents = {
-  Facebook: Facebook,
-  Instagram: Instagram,
-  Linkedin: Linkedin,
-  User: User,
-  
-};
+import Image from "next/image";
+import React, { useState } from "react";
+import Link from "next/link";
+import { navLinks } from "./constants/navLinks";
+import { User, X, Menu } from "lucide-react";
 
 function BoxNavbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <div className='bg-zinc-800 flex justify-around items-center py-8 px-10'>
-      <div className='flex items-center'>
-        <Image src="https://res.cloudinary.com/dm8vb9gkj/image/upload/v1742745497/logo_cn8jdk.svg" alt='logo' width={100} height={100} priority/>
-        <span className='text-white font-semibold mr-1'>Logo</span>
-        <span className='text-orange-500 font-semibold'>Marca</span>
-      </div>
-      <div className='flex gap-x-3'>
-        {navLinks.map((item, index)=> (
-            <Link key={index} href="/" className='text-white hover:text-orange-500 font-semibold'>
+    <header className="bg-zinc-800 w-full py-8 px-4 md:px-10">
+      <div className="flex items-center justify-between max-w-7xl mx-auto">
+        {/* Logo */}
+        <div className="flex items-center">
+          <Image
+            src="https://res.cloudinary.com/dm8vb9gkj/image/upload/v1742745497/logo_cn8jdk.svg"
+            alt="logo"
+            width={100}
+            height={100}
+            priority
+          />
+          <span className="text-white font-semibold mr-1">Logo</span>
+          <span className="text-orange-500 font-semibold">Marca</span>
+        </div>
+        {/* Botão Menu Toggle */}
+        <button
+          className="md:hidden text-white focus:outline-none"
+          onClick={toggleMenu}
+          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isMenuOpen}
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+        <div
+          className={`${
+            isMenuOpen ? "flex" : "hidden"
+          } md:flex flex-col md:flex-row md:items-center md:gap-x-5 absolute md:static top-20 left-0 w-full md:w-auto bg-zinc-800 md:bg-transparent p-4 md:p-0 z-10 transition-all duration-300 ease-in-out`}
+        >
+          {/* Links de navegação */}
+          <div className="flex flex-col md:flex-row gap-y-4 md:gap-y-0 md:gap-x-5">
+            {navLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-white hover:text-orange-500 font-semibold md:text-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 {item.label}
-            </Link>
-        ))}
+              </Link>
+            ))}
+          </div>
+
+          {/* Botão Área do Lojista */}
+          <div className="mt-4 md:mt-0">
+            <button
+              className="flex items-center bg-orange-500 w-full md:w-36 h-10 text-white font-semibold rounded-xl cursor-pointer px-3 gap-x-2 shadow-lg hover:bg-orange-600"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <User size={24} />
+              Área do Lojista
+            </button>
+          </div>
+        </div>
       </div>
-      <div className='flex gap-x-3'>
-       {socialLinks.map((item, index) => {
-          const IconComponent = iconComponents[item.icon as keyof typeof iconComponents]; // Gets the icon component
-          return (
-            <Link key={index} href={item.href} className="text-white hover:text-orange-500">
-              <IconComponent size={24} />
-            </Link>
-          );
-        })}
-      </div>
-      <div>
-        <button className='flex items-center bg-orange-500 w-full h-10 text-white font-semibold rounded-xl cursor-pointer px-3 gap-x-2'><User size={24} /> Área do Lojista</button>
-      </div>
-    </div>
-  )
+    </header>
+  );
 }
 
-export default BoxNavbar
+export default BoxNavbar;
