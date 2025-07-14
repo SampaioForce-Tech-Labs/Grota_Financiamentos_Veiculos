@@ -15,7 +15,7 @@ function BoxNavbar() {
 
   return (
     <header className="bg-zinc-800 w-full py-8 px-4 md:px-10">
-      <div className="flex items-center justify-between max-w-7xl mx-auto">
+      <div className="flex items-center gap-x-42 max-w-7xl mx-auto">
         {/* Logo */}
         <div className="flex items-center">
           <Image
@@ -40,7 +40,7 @@ function BoxNavbar() {
         <div
           className={`${
             isMenuOpen ? "flex" : "hidden"
-          } md:flex flex-col md:flex-row md:items-center md:gap-x-5 absolute md:static top-20 left-0 w-full md:w-auto bg-zinc-800 md:bg-transparent p-4 md:p-0 z-10 transition-all duration-300 ease-in-out`}
+          } md:flex flex-col md:flex-row md:items-center md:gap-x-42 absolute md:static top-20 left-0 w-full md:w-auto bg-zinc-800 md:bg-transparent p-4 md:p-0 z-10 transition-all duration-300 ease-in-out`}
         >
           {/* Links de navegação */}
           <div className="flex flex-col md:flex-row gap-y-4 md:gap-y-0 md:gap-x-5">
@@ -59,7 +59,7 @@ function BoxNavbar() {
           {/* Botão Área do Lojista */}
           <div className="mt-4 md:mt-0">
             <button
-              className="flex items-center bg-orange-500 w-full md:w-36 h-10 text-white font-semibold rounded-xl cursor-pointer px-3 gap-x-2 shadow-lg hover:bg-orange-600"
+              className="flex items-center bg-orange-500 w-full h-10 text-white font-semibold rounded-xl cursor-pointer px-3 gap-x-2 shadow-lg hover:bg-orange-600"
               onClick={() => setIsMenuOpen(false)}
             >
               <User size={24} />
