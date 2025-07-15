@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
 import { navLinks } from "./constants/navLinks";
-import { User, X, Menu } from "lucide-react";
+import { User, X, Menu, Car } from "lucide-react";
 import CTAButton from "../shared/CTAButton/CTAButton";
 
 function BoxNavbar() {
@@ -19,14 +19,11 @@ function BoxNavbar() {
       <div className="flex items-center justify-between gap-x-42 max-w-7xl mx-auto">
         {/* Logo */}
         <div className="flex items-center">
-          <Image
-            src="https://res.cloudinary.com/dm8vb9gkj/image/upload/v1742745497/logo_cn8jdk.svg"
-            alt="logo"
-            width={100}
-            height={100}
-            priority
-          />
-          <span className="text-white font-semibold mr-1">Logo</span>
+          <div className="p-1 bg-orange-500 text-white font-semibold rounded-md mr-2">
+            <Car size={32} />
+
+          </div>
+                   <span className="text-white font-semibold mr-1">Logo</span>
           <span className="text-orange-500 font-semibold">Marca</span>
         </div>
         {/* Botão Menu Toggle */}

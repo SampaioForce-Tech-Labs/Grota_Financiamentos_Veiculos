@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import {Mail, Phone, MapPin, ArrowRight} from 'lucide-react'
+import {Mail, Phone, MapPin, ArrowRight, Car} from 'lucide-react'
 import Link from 'next/link';
 import CTAButton from "../shared/CTAButton/CTAButton";
 
@@ -10,14 +10,11 @@ function BoxFooter() {
       <div className="flex flex-col w-64 gap-y-10">
         {/* Logo */}
         <div className="flex items-center">
-          <Image
-            src="https://res.cloudinary.com/dm8vb9gkj/image/upload/v1742745497/logo_cn8jdk.svg"
-            alt="logo"
-            width={100}
-            height={100}
-            priority
-          />
-          <span className="text-white font-semibold mr-1">Logo</span>
+          <div className="p-1 bg-orange-500 text-white font-semibold rounded-md mr-2">
+            <Car size={32} />
+
+          </div>
+                   <span className="text-white font-semibold mr-1">Logo</span>
           <span className="text-orange-500 font-semibold">Marca</span>
         </div>
         <div>
