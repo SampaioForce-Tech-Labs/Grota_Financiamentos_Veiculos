@@ -22,7 +22,7 @@ const CTAButton: React.FC<CTAButtonProps> = ({
 }) => {
   return (
     <button
-      className={`flex items-center h-10 text-white md:text-sm font-semibold rounded-xl cursor-pointer px-3 gap-x-1 shadow-lg ${bgColor} ${hoverBgColor} ${className}`}
+      className={`flex items-center justify-center min-h-10 max-w-64 text-white md:text-sm rounded-[5px] cursor-pointer px-3 gap-x-1 shadow-lg ${bgColor} ${hoverBgColor} ${className}`}
       onClick={onClick}
     >
       <Icon size={iconSize} />
