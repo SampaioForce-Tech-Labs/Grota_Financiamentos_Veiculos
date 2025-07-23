@@ -1,57 +1,145 @@
 'use client';
 
+import BoxSidebar from '@/src/presentation/layout/Sidebar/BoxSidebar';
 import React from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { Home, FileText, Users, Settings } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, Brush } from 'recharts';
+
+// Dados do gráfico
+const data = [
+  { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
+  { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
+  { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
+  { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
+  { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
+  { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
+  { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
+];
 
 function Page() {
-  const controls = useAnimation();
-
-  const menuItems = [
-    { icon: <Home size={24} />, text: 'Home' },
-    { icon: <FileText size={24} />, text: 'Documentos' },
-    { icon: <Users size={24} />, text: 'Clientes' },
-    { icon: <Settings size={24} />, text: 'Configurações' },
-  ];
-
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <motion.div
-        initial={{ width: 60 }}
-        whileHover={{ width: 200 }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="bg-white shadow-md h-full flex flex-col"
-      >
-        <nav className="flex flex-col mt-4 gap-2">
-          {menuItems.map((item, index) => (
-            <motion.div
-              key={index}
-              className="flex items-center gap-x-5 p-2 px-4 cursor-pointer hover:bg-orange-200"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className='text-orange-500' style={{ width: 24, height: 24, flexShrink: 0 }}>
-                {item.icon}
-              </div>
-              <motion.span
-                initial={{ opacity: 0, width: 0 }}
-                animate={{ opacity: 1, width: 'auto' }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden whitespace-nowrap text-black"
-                style={{
-                  display: 'inline-block',
-                  overflow: 'hidden',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {item.text}
-              </motion.span>
-            </motion.div>
-          ))}
-        </nav>
-      </motion.div>
-      <main className="flex-1 p-6">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
+      <BoxSidebar/>
+      <main className="flex-1 p-6 bg-white rounded-lg shadow-md">
+        <h1 className="text-3xl font-bold text-orange-500 mb-6">Dashboard</h1>
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-4 bg-orange-100 rounded-lg shadow">
+            <h2 className="text-xl font-semibold text-orange-600">Total Financiamentos</h2>
+            <p className="text-3xl font-bold text-orange-700">120</p>
+          </div>
+          <div className="p-4 bg-orange-100 rounded-lg shadow">
+            <h2 className="text-xl font-semibold text-orange-600">Clientes Ativos</h2>
+            <p className="text-3xl font-bold text-orange-700">85</p>
+          </div>
+          <div className="p-4 bg-orange-100 rounded-lg shadow">
+            <h2 className="text-xl font-semibold text-orange-600">Novos Pedidos</h2>
+            <p className="text-3xl font-bold text-orange-700">15</p>
+          </div>
+        </section>
+        <section className="mt-6 p-4 bg-orange-100 rounded-lg shadow">
+          <h2 className="text-xl font-semibold text-orange-600 mb-4">Desempenho</h2>
+          <div className="flex flex-col gap-6">
+            <div className="w-full h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={data}
+                  syncId="dashboardCharts"
+                  margin={{
+                    top: 10,
+                    right: 30,
+                    left: 0,
+                    bottom: 0,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="name" stroke="#1f2937" />
+                  <YAxis stroke="#1f2937" />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#fff',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '8px',
+                      color: '#1f2937',
+                    }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="uv"
+                    stroke="#f97316"
+                    fill="#f97316"
+                    strokeWidth={2}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="w-full h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={data}
+                  syncId="dashboardCharts"
+                  margin={{
+                    top: 10,
+                    right: 30,
+                    left: 0,
+                    bottom: 0,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="name" stroke="#1f2937" />
+                  <YAxis stroke="#1f2937" />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#fff',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '8px',
+                      color: '#1f2937',
+                    }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="pv"
+                    stroke="#fb923c"
+                    fill="#fb923c"
+                    strokeWidth={2}
+                  />
+                  <Brush />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="w-full h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart
+                  data={data}
+                  syncId="dashboardCharts"
+                  margin={{
+                    top: 10,
+                    right: 30,
+                    left: 0,
+                    bottom: 0,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="name" stroke="#1f2937" />
+                  <YAxis stroke="#1f2937" />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#fff',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '8px',
+                      color: '#1f2937',
+                    }}
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="pv"
+                    stroke="#fb923c"
+                    fill="#fb923c"
+                    fillOpacity={0.3}
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );
