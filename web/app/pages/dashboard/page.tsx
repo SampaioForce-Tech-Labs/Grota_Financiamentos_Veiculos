@@ -35,9 +35,27 @@ function Page() {
             <p className="text-3xl font-bold text-orange-700">15</p>
           </div>
         </section>
-        <section className="mt-6 p-4 bg-orange-100 rounded-lg shadow">
+        <div className='flex gap-x-5'>
+          <section className="mt-6 p-4 bg-orange-100 rounded-lg shadow w-1/2">
+          <h2 className="text-xl font-semibold text-orange-600 mb-4">Estatísticas Adicionais</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-4 bg-white rounded-lg shadow">
+              <h3 className="text-xl font-semibold text-orange-600">Receita Total</h3>
+              <p className="text-2xl font-bold text-orange-700">R$ 1.250.000</p>
+            </div>
+            <div className="p-4 bg-white rounded-lg shadow">
+              <h3 className="text-xl font-semibold text-orange-600">Taxa de Conversão</h3>
+              <p className="text-2xl font-bold text-orange-700">68%</p>
+            </div>
+            <div className="p-4 bg-white rounded-lg shadow">
+              <h3 className="text-xl font-semibold text-orange-600">Tempo Médio de Aprovação</h3>
+              <p className="text-2xl font-bold text-orange-700">2.5 dias</p>
+            </div>
+          </div>
+        </section>
+        <section className="mt-6 p-4 bg-orange-100 rounded-lg shadow w-1/2">
           <h2 className="text-xl font-semibold text-orange-600 mb-4">Desempenho</h2>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 ">
             <div className="w-full h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
@@ -140,6 +158,8 @@ function Page() {
             </div>
           </div>
         </section>
+        </div>
+        
       </main>
     </div>
   );
