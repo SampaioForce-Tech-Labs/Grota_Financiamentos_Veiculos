@@ -57,7 +57,7 @@ function BoxNavbar() {
 
             {/* Botão Área do Lojista */}
             <div className="mt-4 md:mt-0">
-              <Link href="/pages/dashboard">
+              <Link href="/dashboard">
                 <CTAButton
                   label="Área do Lojista"
                   Icon={User}
