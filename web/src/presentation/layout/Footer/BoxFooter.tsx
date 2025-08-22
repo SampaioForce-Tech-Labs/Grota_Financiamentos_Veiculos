@@ -1,13 +1,17 @@
 import React from "react";
 import { Mail, Phone, MapPin, ArrowRight, Car } from "lucide-react";
 import Link from "next/link";
-import CTAButton from "../shared/CTAButton/CTAButton";
+import CTAButton from "../shared/CTAButton";
 
 function BoxFooter() {
   return (
-    <footer style={{
-        boxShadow: '0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06)',
-      }} className="bg-white text-black">
+    <footer
+      style={{
+        boxShadow:
+          "0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06)",
+      }}
+      className="bg-white text-black"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-x-2">
           <div className="col-span-1 md:col-span-1 space-y-3">

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { navLinks } from "./constants/navLinks";
 import { User, X, Menu } from "lucide-react";
 import LogoMarca from "../shared/LogoMarca";
-import CTAButton from "../shared/CTAButton/CTAButton";
+import CTAButton from "../shared/CTAButton";
 
 function BoxNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,7 +20,11 @@ function BoxNavbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center cursor-pointer">
-            <LogoMarca />
+            <LogoMarca
+              size={32}
+              withText={false}
+              className="transition-all duration-300"
+            />
           </Link>
           {/* Botão Menu Toggle */}
           <button
