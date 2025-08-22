@@ -13,9 +13,9 @@ export default function DashboardLayout({children}: DashboardLayoutProps){
 
   return (
     <SidebarProvider>
-      <div className='flex'>
+      <div className='flex bg-[#f8f8f8ce]'>
         <BoxSidebar/>
-      <main className='flex'>{children}</main>
+      <main className='flex w-full'>{children}</main>
       </div>
       
     </SidebarProvider>

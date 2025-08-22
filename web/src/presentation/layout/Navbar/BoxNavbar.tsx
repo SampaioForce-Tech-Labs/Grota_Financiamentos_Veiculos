@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { navLinks } from "./constants/navLinks";
-import { User, X, Menu, Car } from "lucide-react";
+import { User, X, Menu } from "lucide-react";
+import LogoMarca from "../shared/LogoMarca";
 import CTAButton from "../shared/CTAButton/CTAButton";
 
 function BoxNavbar() {
@@ -18,14 +19,8 @@ function BoxNavbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 cursor-pointer">
-            <div className="p-1 bg-orange-500 text-white font-semibold rounded-md mr-2">
-              <Car size={42} />
-            </div>
-            <span className="text-xl font-bold text-black">Logo
-              <span className="text-orange-500">Marca</span>
-            </span>
-            
+          <Link href="/" className="flex items-center cursor-pointer">
+            <LogoMarca />
           </Link>
           {/* Botão Menu Toggle */}
           <button
