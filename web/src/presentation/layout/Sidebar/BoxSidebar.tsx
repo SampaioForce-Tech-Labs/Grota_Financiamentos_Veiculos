@@ -5,11 +5,14 @@ import Link from "next/link";
 import {
   Home,
   Users,
-  BarChart2,
   Bell,
   Settings,
   ChevronDown,
   LogOut,
+  Car,
+  DollarSign,
+  Calculator,
+  HelpCircle,
 } from "lucide-react";
 import LogoMarca from "../shared/LogoMarca";
 
@@ -25,7 +28,7 @@ const sidebarMenu = [
   },
   {
     title: "Comissões",
-    icon: BarChart2,
+    icon: DollarSign,
     items: [{ text: "Comissões e Repasse", href: "/comissoes" }],
   },
   {
@@ -35,7 +38,7 @@ const sidebarMenu = [
   },
   {
     title: "Veículos",
-    icon: BarChart2,
+    icon: Car,
     items: [{ text: "Gestão de Veículos", href: "/veiculos" }],
   },
   {
@@ -48,7 +51,7 @@ const sidebarMenu = [
   },
   {
     title: "Financiamentos",
-    icon: BarChart2,
+    icon: Calculator,
     items: [
       { text: "Todos", href: "/financiamentos" },
       { text: "Simulação", href: "/simulacao" },
@@ -61,7 +64,7 @@ const sidebarMenu = [
   },
   {
     title: "Suporte",
-    icon: Bell,
+    icon: HelpCircle,
     items: [{ text: "Central de Suporte", href: "/suporte" }],
   },
 ];
@@ -92,18 +95,18 @@ function BoxSidebar() {
 
   return (
     <motion.div
-      initial={{ width: 60 }}
-      animate={{ width: sidebarOpen ? 280 : 60 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="bg-orange-500 shadow-md z-1 flex flex-col group/sidebar rounded-r-xl "
+      initial={{ width: 75 }}
+      animate={{ width: sidebarOpen ? 280 : 75 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="bg-orange-500 shadow-md z-50 flex flex-col group/sidebar rounded-r-xl fixed left-0 top-0 h-screen"
       onHoverStart={handleSidebarHoverStart}
       onHoverEnd={handleSidebarHoverEnd}
     >
       <nav className="flex flex-col mt-4 gap-2 h-screen">
-        <div className="flex items-center justify-center w-full mb-4">
+        <div className="flex items-center justify-center w-full mb-6 px-3">
           <div className="p-2 rounded-full border-2 border-orange-300 bg-white shadow-lg">
             <LogoMarca
-              size={22}
+              size={24}
               withText={false}
               className="transition-all duration-300"
               iconBgColor="bg-white"
@@ -136,7 +139,7 @@ function BoxSidebar() {
                   className={`flex items-center transition text-base font-montserrat tracking-tight text-white font-normal hover:bg-orange-600 rounded-xl ${
                     sidebarOpen
                       ? "gap-3 px-5 py-3 w-[90%] justify-start"
-                      : "gap-0 px-2 py-3 w-[85%] justify-center"
+                      : "gap-0 px-4 py-4 w-[85%] justify-center"
                   }`}
                   onClick={() =>
                     setOpenMenu(openMenu === group.title ? null : group.title)
@@ -144,7 +147,7 @@ function BoxSidebar() {
                   tabIndex={-1}
                   type="button"
                 >
-                  <Icon size={22} className="text-white flex-shrink-0" />
+                  <Icon size={24} className="text-white flex-shrink-0" />
                   <motion.span
                     initial={false}
                     animate={{
@@ -218,14 +221,14 @@ function BoxSidebar() {
             className={`flex items-center transition text-base font-montserrat tracking-tight shadow-sm text-white font-normal hover:bg-red-500 rounded-xl ${
               sidebarOpen
                 ? "gap-3 px-5 py-3 w-[90%] justify-start"
-                : "gap-0 px-2 py-3 w-[85%] justify-center"
+                : "gap-0 px-4 py-4 w-[85%] justify-center"
             }`}
             onClick={() => {
               /* ação de logout aqui */
             }}
             type="button"
           >
-            <LogOut size={22} className="text-white flex-shrink-0" />
+            <LogOut size={24} className="text-white flex-shrink-0" />
             <motion.span
               initial={false}
               animate={{
