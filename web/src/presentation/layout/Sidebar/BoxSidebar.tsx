@@ -49,7 +49,10 @@ const sidebarMenu = [
   {
     title: "Financiamentos",
     icon: BarChart2,
-    items: [{ text: "Todos", href: "/financiamentos" }],
+    items: [
+      { text: "Todos", href: "/financiamentos" },
+      { text: "Simulação", href: "/simulacao" },
+    ],
   },
   {
     title: "Configurações",
@@ -90,19 +93,23 @@ function BoxSidebar() {
   return (
     <motion.div
       initial={{ width: 60 }}
-      animate={{ width: sidebarOpen ? 220 : 60 }}
+      animate={{ width: sidebarOpen ? 280 : 60 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="bg-gradient-to-b from-orange-50 to-white shadow-md z-1 flex flex-col group/sidebar"
+      className="bg-orange-500 shadow-md z-1 flex flex-col group/sidebar rounded-r-xl "
       onHoverStart={handleSidebarHoverStart}
       onHoverEnd={handleSidebarHoverEnd}
     >
       <nav className="flex flex-col mt-4 gap-2 h-screen">
         <div className="flex items-center justify-center w-full mb-4">
-          <LogoMarca
-            size={22}
-            withText={false}
-            className="transition-all duration-300"
-          />
+          <div className="p-2 rounded-full border-2 border-orange-300 bg-white shadow-lg">
+            <LogoMarca
+              size={22}
+              withText={false}
+              className="transition-all duration-300"
+              iconBgColor="bg-white"
+              iconTextColor="text-orange-500"
+            />
+          </div>
           <motion.span
             initial={false}
             animate={{
@@ -110,10 +117,10 @@ function BoxSidebar() {
               width: sidebarOpen ? "auto" : 0,
             }}
             transition={{ duration: 0.2 }}
-            className="overflow-hidden whitespace-nowrap flex items-center ml-1 text-2xl font-extrabold text-orange-600 font-sans tracking-tight drop-shadow-sm"
+            className="overflow-hidden whitespace-nowrap flex items-center ml-1 text-2xl font-extrabold text-white font-montserrat tracking-tight drop-shadow-sm"
             style={{ display: "inline-block" }}
           >
-            Logo<span className="text-orange-500">Marca</span>
+            Logo<span className="text-orange-200">Marca</span>
           </motion.span>
         </div>
         <div className="flex-1 flex flex-col gap-1">
@@ -126,14 +133,18 @@ function BoxSidebar() {
                 className="mb-1 flex flex-col justify-center items-center"
               >
                 <button
-                  className="flex items-center gap-2 px-4 py-2 w-[92%] text-orange-600 font-semibold hover:bg-orange-100 rounded-xl transition text-base font-sans tracking-tight shadow-sm"
+                  className={`flex items-center transition text-base font-montserrat tracking-tight text-white font-normal hover:bg-orange-600 rounded-xl ${
+                    sidebarOpen
+                      ? "gap-3 px-5 py-3 w-[90%] justify-start"
+                      : "gap-0 px-2 py-3 w-[85%] justify-center"
+                  }`}
                   onClick={() =>
                     setOpenMenu(openMenu === group.title ? null : group.title)
                   }
                   tabIndex={-1}
                   type="button"
                 >
-                  <Icon size={22} className="text-orange-500 flex-shrink-0" />
+                  <Icon size={22} className="text-white flex-shrink-0" />
                   <motion.span
                     initial={false}
                     animate={{
@@ -141,7 +152,7 @@ function BoxSidebar() {
                       width: sidebarOpen ? "auto" : 0,
                     }}
                     transition={{ duration: 0.2 }}
-                    className="overflow-hidden whitespace-nowrap flex items-center text-base font-semibold font-sans"
+                    className="overflow-hidden whitespace-nowrap flex items-center text-base font-normal font-montserrat"
                   >
                     {group.title}
                     <ChevronDown
@@ -175,10 +186,10 @@ function BoxSidebar() {
                           className="block"
                         >
                           <motion.div
-                            className={`flex items-center gap-x-4 p-2 w-full pl-8 cursor-pointer rounded-lg transition-colors text-[15px] font-medium font-sans tracking-tight ${
+                            className={`flex items-center gap-x-4 p-3 w-full pl-10 cursor-pointer rounded-lg transition-colors text-[15px] font-normal font-montserrat tracking-tight ${
                               isActive
-                                ? "bg-orange-100 text-orange-700 font-bold shadow"
-                                : "hover:bg-orange-200 text-gray-700"
+                                ? "bg-white text-orange-600 font-normal shadow-md hover:bg-white hover:text-orange-700"
+                                : "text-white hover:bg-orange-600 hover:text-white"
                             }`}
                             initial={false}
                             animate={{
@@ -188,7 +199,7 @@ function BoxSidebar() {
                             transition={{ duration: 0.2 }}
                             style={{ overflow: "hidden" }}
                           >
-                            <span className="font-medium whitespace-nowrap overflow-hidden">
+                            <span className="font-normal whitespace-nowrap overflow-hidden">
                               {item.text}
                             </span>
                           </motion.div>
@@ -204,13 +215,17 @@ function BoxSidebar() {
         {/* Botão de sair */}
         <div className="flex flex-col items-center mb-4 mt-2">
           <button
-            className="flex items-center gap-2 px-4 py-2 w-[92%] text-red-600 font-semibold hover:bg-red-50 rounded-xl transition text-base font-sans tracking-tight shadow-sm"
+            className={`flex items-center transition text-base font-montserrat tracking-tight shadow-sm text-white font-normal hover:bg-red-500 rounded-xl ${
+              sidebarOpen
+                ? "gap-3 px-5 py-3 w-[90%] justify-start"
+                : "gap-0 px-2 py-3 w-[85%] justify-center"
+            }`}
             onClick={() => {
               /* ação de logout aqui */
             }}
             type="button"
           >
-            <LogOut size={22} className="text-red-500 flex-shrink-0" />
+            <LogOut size={22} className="text-white flex-shrink-0" />
             <motion.span
               initial={false}
               animate={{
@@ -218,7 +233,7 @@ function BoxSidebar() {
                 width: sidebarOpen ? "auto" : 0,
               }}
               transition={{ duration: 0.2 }}
-              className="overflow-hidden whitespace-nowrap flex items-center text-base font-semibold font-sans"
+              className="overflow-hidden whitespace-nowrap flex items-center text-base font-normal font-montserrat"
             >
               Sair
             </motion.span>

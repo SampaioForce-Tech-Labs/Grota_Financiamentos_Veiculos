@@ -5,15 +5,21 @@ interface LogoMarcaProps {
   size: number;
   withText?: boolean;
   className?: string;
+  iconBgColor?: string;
+  iconTextColor?: string;
 }
 
 const LogoMarca: React.FC<LogoMarcaProps> = ({
   size,
   withText = true,
   className = "",
+  iconBgColor = "bg-orange-500",
+  iconTextColor = "text-white",
 }) => (
   <span className={`flex items-center space-x-2 ${className}`}>
-    <span className="p-1 bg-orange-500 text-white font-semibold rounded-md">
+    <span
+      className={`p-1 ${iconBgColor} ${iconTextColor} font-semibold rounded-md`}
+    >
       <Car size={size} />
     </span>
     {withText && (
