@@ -10,6 +10,14 @@ import {
   AlertCircle,
 } from "lucide-react";
 
+// Interface para o resultado do cálculo
+interface ResultadoCalculo {
+  valorParcela: number;
+  valorTotalFinanciamento: number;
+  valorTotalJuros: number;
+  valorTotalPago: number;
+}
+
 // Função para calcular financiamento usando sistema Price (parcelas fixas)
 function calcularFinanciamento(
   valorVeiculo: number,
@@ -53,7 +61,7 @@ export default function SimulacaoPage() {
   const [valorEntrada, setValorEntrada] = useState<string>("");
   const [taxaJuros, setTaxaJuros] = useState<string>("");
   const [numParcelas, setNumParcelas] = useState<string>("");
-  const [resultado, setResultado] = useState<any>(null);
+  const [resultado, setResultado] = useState<ResultadoCalculo | null>(null);
   const [showResultado, setShowResultado] = useState(false);
 
   // Formatar valor em reais
