@@ -1,7 +1,8 @@
 import React from "react";
-import { Mail, Phone, MapPin, ArrowRight, Car } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import CTAButton from "../shared/CTAButton";
+import LogoMarca from "../shared/LogoMarca";
 
 function BoxFooter() {
   return (
@@ -20,13 +21,11 @@ function BoxFooter() {
               href="/"
               className="flex items-center space-x-2 cursor-pointer"
             >
-              <div className="p-1 bg-orange-500 text-white font-semibold rounded-md mr-2">
-                <Car size={42} />
-              </div>
-              <span className="text-xl font-bold text-black">
-                Logo
-                <span className="text-orange-500">Marca</span>
-              </span>
+              <LogoMarca
+                size={42}
+                withText={true}
+                className="transition-all duration-300"
+              />
             </Link>
             <div>
               <p className="text-gray-500 ">
