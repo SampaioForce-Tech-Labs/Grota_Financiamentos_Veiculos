@@ -16,8 +16,10 @@ export function useBreadcrumb({ items, title }: UseBreadcrumbProps) {
     if (title) {
       setPageTitle(title);
     }
-  }, [items, title, setBreadcrumb, setPageTitle]);
-} // Hook específico para rotas comuns
+  }, [JSON.stringify(items), title, setBreadcrumb, setPageTitle]);
+}
+
+// Hook específico para rotas comuns
 export function useDashboardBreadcrumb() {
   useBreadcrumb({ items: ["Dashboard"], title: "Dashboard" });
 }

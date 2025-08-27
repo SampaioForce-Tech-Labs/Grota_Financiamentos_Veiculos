@@ -1,82 +1,18 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Search, Bell, ChevronRight } from "lucide-react";
 import { useHeader } from "@/src/application/core/context/HeaderContext";
-import { usePathname } from "next/navigation";
-
-// Mapeamento de rotas para breadcrumbs
-const routeBreadcrumbMap: Record<
-  string,
-  { breadcrumb: string[]; title: string }
-> = {
-  "/dashboard": { breadcrumb: ["Dashboard"], title: "Dashboard" },
-  "/clientes": { breadcrumb: ["Dashboard", "Clientes"], title: "Clientes" },
-  "/documentos": {
-    breadcrumb: ["Dashboard", "Clientes", "Documentos"],
-    title: "Documentos",
-  },
-  "/financiamentos": {
-    breadcrumb: ["Dashboard", "Financiamentos"],
-    title: "Financiamentos",
-  },
-  "/simulacao": {
-    breadcrumb: ["Dashboard", "Financiamentos", "Simulação"],
-    title: "Simulação de Financiamento",
-  },
-  "/relatorios": {
-    breadcrumb: ["Dashboard", "Relatórios"],
-    title: "Relatórios",
-  },
-  "/configuracoes": {
-    breadcrumb: ["Dashboard", "Configurações"],
-    title: "Configurações",
-  },
-  "/suporte": { breadcrumb: ["Dashboard", "Suporte"], title: "Suporte" },
-  "/comissoes": {
-    breadcrumb: ["Dashboard", "Comissões"],
-    title: "Comissões e Repasse",
-  },
-  "/notificacoes": {
-    breadcrumb: ["Dashboard", "Notificações"],
-    title: "Notificações e Alertas",
-  },
-  "/veiculos": {
-    breadcrumb: ["Dashboard", "Veículos"],
-    title: "Gestão de Veículos",
-  },
-};
 
 function DashboardHeader() {
-  const { breadcrumb, setBreadcrumb, setPageTitle } = useHeader();
-  const pathname = usePathname();
-
-  // Atualizar breadcrumb automaticamente baseado na rota
-  useEffect(() => {
-    const routeConfig = routeBreadcrumbMap[pathname];
-    if (routeConfig) {
-      setBreadcrumb(routeConfig.breadcrumb);
-      setPageTitle(routeConfig.title);
-    } else {
-      // Fallback para rotas não mapeadas
-      const segments = pathname.split("/").filter(Boolean);
-      const breadcrumbItems = [
-        "Dashboard",
-        ...segments.map(
-          (segment) => segment.charAt(0).toUpperCase() + segment.slice(1)
-        ),
-      ];
-      setBreadcrumb(breadcrumbItems);
-      setPageTitle(breadcrumbItems[breadcrumbItems.length - 1]);
-    }
-  }, [pathname, setBreadcrumb, setPageTitle]);
+  const { breadcrumb } = useHeader();
 
   return (
     <header className="bg-white border-b border-gray-200 h-16 px-6 flex items-center justify-between shadow-sm">
       {/* Lado Esquerdo - Breadcrumb */}
       <div className="flex items-center space-x-2 text-sm">
         {breadcrumb.map((item, index) => (
-          <React.Fragment key={index}>
+          <React.Fragment key={`${item}-${index}`}>
             <span
               className={`${
                 index === breadcrumb.length - 1

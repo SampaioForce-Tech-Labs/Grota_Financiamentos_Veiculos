@@ -2,8 +2,7 @@
 
 import BoxSidebar from "@/src/presentation/layout/Sidebar/BoxSidebar";
 import DashboardHeader from "@/src/presentation/layout/Header/DashboardHeader";
-import React from "react";
-import { ReactNode } from "react";
+import React, {ReactNode} from "react";
 import {
   SidebarProvider,
   useSidebar,
@@ -14,7 +13,7 @@ interface DashboardLayoutProps {
   children: ReactNode;
 }
 
-function DashboardContent({ children }: DashboardLayoutProps) {
+function DashboardContent({ children }: Readonly<DashboardLayoutProps>) {
   const { isSidebarOpen } = useSidebar();
 
   return (
@@ -32,7 +31,7 @@ function DashboardContent({ children }: DashboardLayoutProps) {
   );
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function DashboardLayout({ children }: Readonly<DashboardLayoutProps>) {
   return (
     <SidebarProvider>
       <HeaderProvider>

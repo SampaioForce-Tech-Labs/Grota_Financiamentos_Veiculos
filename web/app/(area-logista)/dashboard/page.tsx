@@ -193,8 +193,8 @@ export default function DashboardPage() {
                   outerRadius={80}
                   label
                 >
-                  {dashboardPieData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  {dashboardPieData.map((entry) => (
+                    <Cell key={entry.name} fill={entry.color} />
                   ))}
                 </Pie>
                 <Tooltip />

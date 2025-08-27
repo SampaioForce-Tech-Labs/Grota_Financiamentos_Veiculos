@@ -5,7 +5,7 @@ import React, {
   useContext,
   useState,
   ReactNode,
-  useCallback,
+  useMemo,
 } from "react";
 
 interface HeaderContextType {
@@ -28,28 +28,22 @@ export function useHeader() {
 interface HeaderProviderProps {
   children: ReactNode;
 }
+export function HeaderProvider({ children }: Readonly<HeaderProviderProps>) {
+  const [breadcrumb, setBreadcrumb] = useState<string[]>(["Dashboard"]);
+  const [pageTitle, setPageTitle] = useState<string>("Dashboard");
 
-export function HeaderProvider({ children }: HeaderProviderProps) {
-  const [breadcrumb, setBreadcrumbState] = useState<string[]>(["Dashboard"]);
-  const [pageTitle, setPageTitleState] = useState<string>("Dashboard");
-
-  const setBreadcrumb = useCallback((newBreadcrumb: string[]) => {
-    setBreadcrumbState(newBreadcrumb);
-  }, []);
-
-  const setPageTitle = useCallback((newTitle: string) => {
-    setPageTitleState(newTitle);
-  }, []);
+  const value = useMemo(
+    () => ({
+      breadcrumb,
+      setBreadcrumb,
+      pageTitle,
+      setPageTitle,
+    }),
+    [breadcrumb, pageTitle]
+  );
 
   return (
-    <HeaderContext.Provider
-      value={{
-        breadcrumb,
-        setBreadcrumb,
-        pageTitle,
-        setPageTitle,
-      }}
-    >
+    <HeaderContext.Provider value={value}>
       {children}
     </HeaderContext.Provider>
   );

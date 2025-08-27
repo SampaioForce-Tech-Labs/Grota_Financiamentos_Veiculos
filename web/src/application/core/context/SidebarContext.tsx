@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useMemo } from "react";
 
 interface SidebarContextType {
   isSidebarOpen: boolean;
@@ -8,7 +8,7 @@ interface SidebarContextType {
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
-export function SidebarProvider({ children }: { children: ReactNode }) {
+export function SidebarProvider({ children }: { readonly children: ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -19,10 +19,13 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
     setIsSidebarOpen(open);
   };
 
+  const value = useMemo(
+    () => ({ isSidebarOpen, toggleSidebar, setSidebarOpen }),
+    [isSidebarOpen]
+  );
+
   return (
-    <SidebarContext.Provider
-      value={{ isSidebarOpen, toggleSidebar, setSidebarOpen }}
-    >
+    <SidebarContext.Provider value={value}>
       {children}
     </SidebarContext.Provider>
   );
