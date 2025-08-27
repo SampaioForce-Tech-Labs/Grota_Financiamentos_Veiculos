@@ -1,5 +1,11 @@
+"use client";
+
+import { useClientesBreadcrumb } from "@/src/application/core/hooks/useBreadcrumb";
+
 // Clientes - Cadastro, documentação, histórico
 export default function ClientesPage() {
+  useClientesBreadcrumb();
+
   return (
     <div className="p-4 md:p-8 max-w-7xl space-y-8">
       <h1 className="text-3xl font-bold mb-4">Clientes</h1>

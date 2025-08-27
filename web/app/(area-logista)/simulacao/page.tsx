@@ -9,6 +9,7 @@ import {
   Calendar,
   AlertCircle,
 } from "lucide-react";
+import { useSimulacaoBreadcrumb } from "@/src/application/core/hooks/useBreadcrumb";
 
 // Interface para o resultado do cálculo
 interface ResultadoCalculo {
@@ -57,6 +58,9 @@ function calcularFinanciamento(
 }
 
 export default function SimulacaoPage() {
+  // Configurar breadcrumb para esta página
+  useSimulacaoBreadcrumb();
+
   const [valorVeiculo, setValorVeiculo] = useState<string>("");
   const [valorEntrada, setValorEntrada] = useState<string>("");
   const [taxaJuros, setTaxaJuros] = useState<string>("");

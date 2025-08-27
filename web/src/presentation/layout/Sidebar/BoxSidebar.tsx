@@ -13,8 +13,10 @@ import {
   DollarSign,
   Calculator,
   HelpCircle,
+  User,
 } from "lucide-react";
 import LogoMarca from "../shared/LogoMarca";
+import { useSidebar } from "@/src/application/core/context/SidebarContext";
 
 // Definição do menu lateral
 const sidebarMenu = [
@@ -70,21 +72,33 @@ const sidebarMenu = [
 ];
 
 function BoxSidebar() {
-  // Handlers para hover da sidebar
-  const handleSidebarHoverStart = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setSidebarOpen(true);
-  };
-  const handleSidebarHoverEnd = () => {
-    timeoutRef.current = setTimeout(() => setSidebarOpen(false), 150);
-  };
+  const { isSidebarOpen, setSidebarOpen: setGlobalSidebarOpen } = useSidebar();
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Handlers para hover da sidebar
+  const handleSidebarHoverStart = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setSidebarOpen(true);
+    setGlobalSidebarOpen(true);
+  };
+
+  const handleSidebarHoverEnd = () => {
+    timeoutRef.current = setTimeout(() => {
+      setSidebarOpen(false);
+      setGlobalSidebarOpen(false);
+    }, 150);
+  };
+
+  // Sincronizar estado local com contexto quando necessário
+  React.useEffect(() => {
+    setSidebarOpen(isSidebarOpen);
+  }, [isSidebarOpen]);
+
   // Estado do sistema - será atualizado pelo backend
-  const [systemStatus, setSystemStatus] = useState({
+  const [systemStatus] = useState({
     version: "1.0.0",
     status: "offline", // "online", "offline", "maintenance"
     type: "Stable",
@@ -245,6 +259,35 @@ function BoxSidebar() {
             );
           })}
         </div>
+
+        {/* Botão de Perfil */}
+        <div className="flex flex-col items-center mb-2 mt-2">
+          <button
+            className={`flex items-center transition text-base font-montserrat tracking-tight text-white font-normal hover:bg-orange-600 rounded-xl ${
+              sidebarOpen
+                ? "gap-3 px-5 py-3 w-[90%] justify-start"
+                : "gap-0 px-4 py-4 w-[85%] justify-center"
+            }`}
+            onClick={() => {
+              /* ação de perfil aqui */
+            }}
+            type="button"
+          >
+            <User size={24} className="text-white flex-shrink-0" />
+            <motion.span
+              initial={false}
+              animate={{
+                opacity: sidebarOpen ? 1 : 0,
+                width: sidebarOpen ? "auto" : 0,
+              }}
+              transition={{ duration: 0.2, delay: sidebarOpen ? 0.3 : 0 }}
+              className="overflow-hidden whitespace-nowrap flex items-center text-base font-normal font-montserrat"
+            >
+              Perfil
+            </motion.span>
+          </button>
+        </div>
+
         {/* Botão de sair */}
         <div className="flex flex-col items-center mb-2 mt-2">
           <button

@@ -1,11 +1,16 @@
-import React from 'react'
+"use client";
 
-function page() {
+import React from "react";
+import { useFinanciamentosBreadcrumb } from "@/src/application/core/hooks/useBreadcrumb";
+
+function FinanciamentosPage() {
+  useFinanciamentosBreadcrumb();
+
   return (
     <div>
       <h1>Financiamentos</h1>
     </div>
-  )
+  );
 }
 
-export default page
+export default FinanciamentosPage;

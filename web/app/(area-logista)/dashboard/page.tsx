@@ -27,6 +27,7 @@ import {
   dashboardLineDataDias,
   dashboardIndicators,
 } from "./constants/dashboardCharts";
+import { useDashboardBreadcrumb } from "@/src/application/core/hooks/useBreadcrumb";
 
 // Função utilitária para calcular variação percentual
 function calcPercent(current: number, previous: number): number {
@@ -42,6 +43,9 @@ const previousIndicators = [
   { label: "Em Análise", value: 90 },
 ];
 export default function DashboardPage() {
+  // Configurar breadcrumb para esta página
+  useDashboardBreadcrumb();
+
   const [periodo, setPeriodo] = useState("meses");
   const lineData =
     periodo === "meses" ? dashboardLineDataMeses : dashboardLineDataDias;

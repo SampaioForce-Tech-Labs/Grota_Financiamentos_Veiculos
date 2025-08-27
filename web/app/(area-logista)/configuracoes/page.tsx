@@ -1,6 +1,11 @@
-import React from "react";
+"use client";
 
-function page() {
+import React from "react";
+import { useConfiguracoesBreadcrumb } from "@/src/application/core/hooks/useBreadcrumb";
+
+function ConfiguracoesPage() {
+  useConfiguracoesBreadcrumb();
+
   return (
     <div className="p-4 md:p-8 max-w-7xl space-y-8">
       <h1 className="text-3xl font-bold mb-4">Configurações da Conta</h1>
@@ -70,4 +75,4 @@ function page() {
   );
 }
 
-export default page;
+export default ConfiguracoesPage;

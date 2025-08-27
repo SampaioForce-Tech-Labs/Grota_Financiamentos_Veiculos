@@ -1,21 +1,33 @@
 "use client";
 
 import BoxSidebar from "@/src/presentation/layout/Sidebar/BoxSidebar";
+import DashboardHeader from "@/src/presentation/layout/Header/DashboardHeader";
 import React from "react";
 import { ReactNode } from "react";
-import { SidebarProvider } from "@/src/application/core/context/SidebarContext";
+import {
+  SidebarProvider,
+  useSidebar,
+} from "@/src/application/core/context/SidebarContext";
+import { HeaderProvider } from "@/src/application/core/context/HeaderContext";
 
 interface DashboardLayoutProps {
   children: ReactNode;
 }
 
 function DashboardContent({ children }: DashboardLayoutProps) {
+  const { isSidebarOpen } = useSidebar();
+
   return (
     <div className="flex bg-[#f8f8f8ce] min-h-screen">
       <BoxSidebar />
-      <main className="flex w-full ml-[75px] transition-all duration-500 ease-in-out">
-        {children}
-      </main>
+      <div
+        className={`flex flex-col w-full transition-all duration-700 ease-in-out ${
+          isSidebarOpen ? "ml-[280px]" : "ml-[75px]"
+        }`}
+      >
+        <DashboardHeader />
+        <main className="flex-1 p-6">{children}</main>
+      </div>
     </div>
   );
 }
@@ -23,7 +35,9 @@ function DashboardContent({ children }: DashboardLayoutProps) {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <SidebarProvider>
-      <DashboardContent>{children}</DashboardContent>
+      <HeaderProvider>
+        <DashboardContent>{children}</DashboardContent>
+      </HeaderProvider>
     </SidebarProvider>
   );
 }
