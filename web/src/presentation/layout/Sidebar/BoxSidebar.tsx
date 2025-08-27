@@ -83,6 +83,27 @@ function BoxSidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Estado do sistema - será atualizado pelo backend
+  const [systemStatus, setSystemStatus] = useState({
+    version: "1.0.0",
+    status: "offline", // "online", "offline", "maintenance"
+    type: "Stable",
+  });
+
+  // Função para obter a cor do status
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "online":
+        return "bg-green-500";
+      case "offline":
+        return "bg-red-500";
+      case "maintenance":
+        return "bg-yellow-500";
+      default:
+        return "bg-gray-500";
+    }
+  };
+
   // Abre automaticamente o grupo do menu da página ativa ao abrir a sidebar
   React.useEffect(() => {
     if (sidebarOpen) {
@@ -97,7 +118,7 @@ function BoxSidebar() {
     <motion.div
       initial={{ width: 75 }}
       animate={{ width: sidebarOpen ? 280 : 75 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
       className="bg-orange-500 shadow-md z-50 flex flex-col group/sidebar rounded-r-xl fixed left-0 top-0 h-screen"
       onHoverStart={handleSidebarHoverStart}
       onHoverEnd={handleSidebarHoverEnd}
@@ -136,10 +157,10 @@ function BoxSidebar() {
                 className="mb-1 flex flex-col justify-center items-center"
               >
                 <button
-                  className={`flex items-center transition text-base font-montserrat tracking-tight text-white font-normal hover:bg-orange-600 rounded-xl ${
+                  className={`transition text-base font-montserrat tracking-tight text-white font-normal hover:bg-orange-600 rounded-xl relative ${
                     sidebarOpen
-                      ? "gap-3 px-5 py-3 w-[90%] justify-start"
-                      : "gap-0 px-4 py-4 w-[85%] justify-center"
+                      ? "flex items-center gap-3 px-5 py-3 w-[90%] justify-start"
+                      : "w-[85%] h-14 flex items-center justify-center"
                   }`}
                   onClick={() =>
                     setOpenMenu(openMenu === group.title ? null : group.title)
@@ -147,28 +168,37 @@ function BoxSidebar() {
                   tabIndex={-1}
                   type="button"
                 >
-                  <Icon size={24} className="text-white flex-shrink-0" />
+                  <Icon
+                    size={24}
+                    className={`text-white flex-shrink-0 ${
+                      !sidebarOpen ? "absolute" : ""
+                    }`}
+                  />
                   <motion.span
                     initial={false}
                     animate={{
                       opacity: sidebarOpen ? 1 : 0,
                       width: sidebarOpen ? "auto" : 0,
                     }}
-                    transition={{ duration: 0.2 }}
-                    className="overflow-hidden whitespace-nowrap flex items-center text-base font-normal font-montserrat"
+                    transition={{ duration: 0.2, delay: sidebarOpen ? 0.3 : 0 }}
+                    className="overflow-hidden whitespace-nowrap flex items-center text-base font-normal font-montserrat flex-1"
                   >
                     {group.title}
+                  </motion.span>
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      opacity: sidebarOpen ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.2, delay: sidebarOpen ? 0.3 : 0 }}
+                  >
                     <ChevronDown
                       size={18}
-                      className={`ml-1 transition-transform ${
+                      className={`transition-transform flex-shrink-0 ${
                         isOpen ? "rotate-180" : "rotate-0"
                       }`}
-                      style={{
-                        opacity: sidebarOpen ? 1 : 0,
-                        transition: "opacity 0.2s",
-                      }}
                     />
-                  </motion.span>
+                  </motion.div>
                 </button>
                 <motion.div
                   initial={false}
@@ -216,7 +246,7 @@ function BoxSidebar() {
           })}
         </div>
         {/* Botão de sair */}
-        <div className="flex flex-col items-center mb-4 mt-2">
+        <div className="flex flex-col items-center mb-2 mt-2">
           <button
             className={`flex items-center transition text-base font-montserrat tracking-tight shadow-sm text-white font-normal hover:bg-red-500 rounded-xl ${
               sidebarOpen
@@ -241,6 +271,66 @@ function BoxSidebar() {
               Sair
             </motion.span>
           </button>
+        </div>
+
+        {/* Container de Status do Sistema */}
+        <div className="flex flex-col items-center mb-4 border-t border-white/30 pt-3">
+          <div
+            className={`flex items-center transition text-xs font-montserrat tracking-tight text-white/80 font-normal rounded-lg ${
+              sidebarOpen
+                ? "gap-2 px-3 py-2 w-[90%] justify-between"
+                : "gap-0 px-2 py-2 w-[85%] justify-center"
+            }`}
+          >
+            <motion.span
+              initial={false}
+              animate={{
+                opacity: sidebarOpen ? 1 : 0,
+                width: sidebarOpen ? "auto" : 0,
+              }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden whitespace-nowrap flex items-center text-xs font-normal font-montserrat"
+            >
+              Versão {systemStatus.type} {systemStatus.version}
+            </motion.span>
+
+            <div className="flex items-center gap-1">
+              <motion.span
+                initial={false}
+                animate={{
+                  opacity: sidebarOpen ? 1 : 0,
+                  width: sidebarOpen ? "auto" : 0,
+                }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden whitespace-nowrap flex items-center text-xs font-normal font-montserrat"
+              >
+                {systemStatus.status === "online"
+                  ? "Online"
+                  : systemStatus.status === "offline"
+                  ? "Offline"
+                  : "Manutenção"}
+              </motion.span>
+              <motion.div
+                className={`w-2 h-2 rounded-full flex-shrink-0 ${getStatusColor(
+                  systemStatus.status
+                )}`}
+                animate={{
+                  opacity: [1, 0.3, 1],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration:
+                    systemStatus.status === "online"
+                      ? 2
+                      : systemStatus.status === "maintenance"
+                      ? 1
+                      : 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
+          </div>
         </div>
       </nav>
     </motion.div>

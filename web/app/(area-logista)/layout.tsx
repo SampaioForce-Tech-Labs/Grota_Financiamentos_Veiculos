@@ -13,7 +13,7 @@ function DashboardContent({ children }: DashboardLayoutProps) {
   return (
     <div className="flex bg-[#f8f8f8ce] min-h-screen">
       <BoxSidebar />
-      <main className="flex w-full ml-[90px] transition-all duration-500 ease-in-out">
+      <main className="flex w-full ml-[75px] transition-all duration-500 ease-in-out">
         {children}
       </main>
     </div>
