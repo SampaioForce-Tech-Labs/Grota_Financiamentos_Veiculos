@@ -10,13 +10,13 @@ interface UseBreadcrumbProps {
 
 export function useBreadcrumb({ items, title }: UseBreadcrumbProps) {
   const { setBreadcrumb, setPageTitle } = useHeader();
-
+  const itemsStr = JSON.stringify(items);
   useEffect(() => {
     setBreadcrumb(items);
     if (title) {
       setPageTitle(title);
     }
-  }, [JSON.stringify(items), title, setBreadcrumb, setPageTitle]);
+  }, [itemsStr, title, setBreadcrumb, setPageTitle]);
 }
 
 // Hook específico para rotas comuns
