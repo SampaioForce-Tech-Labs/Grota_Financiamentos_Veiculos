@@ -195,7 +195,7 @@ function RelatoriosPage() {
         <div className="logo-print-only">
           {/* A logo só aparece na impressão/exportação, mas para evitar warning, usamos <Image> na visualização normal */}
           <span className="hidden print:inline">
-            <Image src="/logo-marca.svg" alt="Logo Marca" />
+            <Image src="/logo-marca.svg" alt="Logo Marca" width={100} height={100} />
           </span>
           <span className="print:hidden">
             <Image src="/logo-marca.svg" alt="Logo Marca" width={48} height={48} priority />
