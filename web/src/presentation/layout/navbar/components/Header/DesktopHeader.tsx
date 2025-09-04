@@ -23,9 +23,7 @@ export const DesktopHeader = ({ isScrolled, onLoginClick }: DesktopHeaderProps) 
         className={`z-50 flex items-center justify-center gap-2 transition-all duration-300 ${
           isScrolled ? "ml-4" : ""
         }`}
-        href="https://v0.app"
-        target="_blank"
-        rel="noopener noreferrer"
+        href="/"
       >
         <Image
           src="/Grota_logo_horizontal_positivo-removebg-preview.png"
@@ -37,13 +35,20 @@ export const DesktopHeader = ({ isScrolled, onLoginClick }: DesktopHeaderProps) 
       </Link>
 
       <nav className="absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-muted-foreground transition duration-200 hover:text-foreground md:flex md:space-x-2">
-        {["Inicio", "Nossa Historia", "Soluções", "Financiamento", "Blog", "Contato"].map((item) => (
+        {[
+          { name: "Inicio", href: "/" },
+          { name: "Nossa Historia", href: "/nossa-historia" },
+          { name: "Soluções", href: "solucoes" },
+          { name: "Financiamento", href: "#" },
+          { name: "Blog", href: "#" },
+          { name: "Contato", href: "/contato" }
+        ].map((item) => (
           <Link
-            key={item}
-            href="#"
+            key={item.name}
+            href={item.href}
             className="relative px-4 py-2 text-white hover:text-foreground transition-colors cursor-pointer"
           >
-            <span className="relative z-20">{item}</span>
+            <span className="relative z-20">{item.name}</span>
           </Link>
         ))}
       </nav>

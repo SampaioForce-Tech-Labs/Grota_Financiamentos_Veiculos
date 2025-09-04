@@ -1,26 +1,26 @@
 export const slides = [
     {
-      title: "Financie seu Veículo dos Sonhos",
-      subtitle: "Taxas especiais e aprovação rápida para realizar seu sonho",
-      badge: "Líder em Financiamento Automotivo",
-      image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      title: "Lorem Ipsum Dolor Sit",
+      subtitle: "Lorem ipsum dolor sit amet consectetur adipiscing elit",
+      badge: "Lorem Ipsum Dolor",
+      image: "https://placehold.net/800x600.png"
     },
      {
-      title: "Financie seu Veículo dos Sonhos",
-      subtitle: "Taxas especiais e aprovação rápida para realizar seu sonho",
-      badge: "Líder em Financiamento Automotivo",
-      image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      title: "Consectetur Adipiscing Elit",
+      subtitle: "Sed do eiusmod tempor incididunt ut labore et dolore",
+      badge: "Sed Do Eiusmod",
+      image: "https://placehold.net/800x600.png"
     },
      {
-      title: "Financie seu Veículo dos Sonhos",
-      subtitle: "Taxas especiais e aprovação rápida para realizar seu sonho",
-      badge: "Líder em Financiamento Automotivo",
-      image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      title: "Ut Enim Ad Minim",
+      subtitle: "Quis nostrud exercitation ullamco laboris nisi ut aliquip",
+      badge: "Quis Nostrud Exercitation",
+      image: "https://placehold.net/800x600.png"
     },
      {
-      title: "Financie seu Veículo dos Sonhos",
-      subtitle: "Taxas especiais e aprovação rápida para realizar seu sonho",
-      badge: "Líder em Financiamento Automotivo",
-      image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      title: "Duis Aute Irure Dolor",
+      subtitle: "In reprehenderit in voluptate velit esse cillum dolore",
+      badge: "Voluptate Velit Esse",
+      image: "https://placehold.net/800x600.png"
     },
   ]

@@ -8,6 +8,10 @@ import { DesktopHeader } from "@/src/presentation/layout/navbar/components/Heade
 import { MobileHeader } from "@/src/presentation/layout/navbar/components/Header/MobileHeader"
 import { MobileMenu } from "@/src/presentation/layout/navbar/components/Header/MobileMenu"
 import { ModalContainer } from "@/src/presentation/layout/modais/ModalContainer"
+import Carousel01 from "@/src/presentation/components/banners/carroucel/Carousel"
+import CTABanner from "@/src/presentation/components/banners/CTABanner"
+import Footer from "@/src/presentation/layout/Footer/Footer"
+import FAQ from "@/src/presentation/components/FAQ/FAQ"
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -37,8 +41,16 @@ export default function Home() {
         isOpen={isMobileMenuOpen}
         onLoginClick={handleMobileLoginClick}
       />
-
+      
       <HeroSection />
+
+      <Carousel01/>
+      
+      <CTABanner />
+      
+      <FAQ />
+      
+      <Footer />
       
       <ModalContainer {...modalManager} />
     </div>
