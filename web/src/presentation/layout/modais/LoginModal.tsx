@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { X, User, Lock, AlertCircle, Loader2 } from "lucide-react";
-import { useAuth } from "@/src/hooks/useAuth";
-
+import { useAuth } from "@/src/application/services/auth/hooks/useAuth";
 
 interface LoginModalProps {
   isOpen: boolean;

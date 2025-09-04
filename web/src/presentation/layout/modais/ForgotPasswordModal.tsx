@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { X, Mail, AlertCircle, Loader2 } from "lucide-react";
-import { useAuth } from "@/src/hooks/useAuth";
-
-
+import { useAuth } from "@/src/application/services/auth/hooks/useAuth";
 
 
 interface ForgotPasswordModalProps {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MockAuthService, AuthCredentials, RegisterData, AuthResult } from '@/src/services/auth/MockAuthService';
+import { MockAuthService, AuthCredentials, RegisterData, AuthResult } from '@/src/application/services/auth/MockAuthService';
 
 export function useAuth() {
   const [isLoading, setIsLoading] = useState(false);
