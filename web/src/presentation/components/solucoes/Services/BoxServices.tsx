@@ -3,7 +3,7 @@ import { Car, CreditCard, Shield } from "lucide-react";
 
 function BoxServices() {
   return (
-    <div>
+    <div className='max-w-7xl mx-auto'>
       <h1 className="text-3xl font-bold text-center mb-12 text-gray-800">
           Lorem Ipsum
         </h1>

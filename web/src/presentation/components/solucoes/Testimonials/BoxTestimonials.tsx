@@ -3,7 +3,7 @@ import { User, Star } from "lucide-react";
 
 function BoxTestimonials() {
   return (
-    <div className="mt-16">
+    <div className="mt-16 max-w-7xl mx-auto">
           <h2 className="text-2xl font-bold text-center text-gray-800 mb-12">
             Lorem Ipsum Testimonials
           </h2>
