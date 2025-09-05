@@ -8,11 +8,13 @@ import { MobileHeader } from "@/src/presentation/layout/navbar/components/Header
 import { MobileMenu } from "@/src/presentation/layout/navbar/components/Header/MobileMenu";
 import Footer from "@/src/presentation/layout/Footer/Footer";
 import { ModalContainer } from "@/src/presentation/layout/modais/ModalContainer";
-import BoxHero from "@/src/presentation/components/contato/Hero/BoxHero";
-import BoxMapa from "@/src/presentation/components/contato/Mapa/BoxMapa";
-import BoxContatoForm from "@/src/presentation/components/contato/contatoForm/BoxContatoForm";
+import BoxHero from "@/src/presentation/components/solucoes/Hero/BoxHero";
+import BoxServices from "@/src/presentation/components/solucoes/Services/BoxServices";
+import BoxNewsletter from "@/src/presentation/components/solucoes/Newsletter/BoxNewsletter";
+import BoxTestimonials from "@/src/presentation/components/solucoes/Testimonials/BoxTestimonials";
 
-function Contato() {
+
+function Solucoes() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isScrolled = useScrollDetection(100);
   const modalManager = useModalManager();
@@ -23,7 +25,6 @@ function Contato() {
     setIsMobileMenuOpen(false);
     modalManager.openLoginModal();
   };
-
   return (
     <div className="min-h-screen w-full relative bg-white">
       <DesktopHeader
@@ -43,15 +44,11 @@ function Contato() {
       {/* Hero Section */}
       <BoxHero />
       <section className="py-16 px-4 max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-12 text-gray-800">
-          Contato
-        </h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Mapa */}
-          <BoxMapa />
-          {/* Formulário de Contato */}
-          <BoxContatoForm />
-        </div>
+        <BoxServices/>
+        {/* Newsletter Section */}
+       <BoxNewsletter/>
+        {/* Testimonials Section */}
+        <BoxTestimonials/>
       </section>
       <Footer />
       <ModalContainer {...modalManager} />
@@ -59,4 +56,4 @@ function Contato() {
   );
 }
 
-export default Contato;
+export default Solucoes;
