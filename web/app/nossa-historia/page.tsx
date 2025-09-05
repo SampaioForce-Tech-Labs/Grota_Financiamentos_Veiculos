@@ -10,6 +10,7 @@ import { ModalContainer } from "@/src/presentation/layout/modais/ModalContainer"
 import Footer from "@/src/presentation/layout/Footer/Footer"
 import Counter from "@/src/presentation/components/Counter"
 import { Users, Target, Award, TrendingUp, CheckCircle, Calendar } from "lucide-react"
+import Image from "next/image"
 
 export default function Sobre() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -43,7 +44,7 @@ export default function Sobre() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden -mt-24 h-[40rem]">
         <div className="absolute inset-0">
-          <img 
+          <Image
             src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
             alt="Background"
             className="w-full h-full object-cover"
@@ -88,7 +89,7 @@ export default function Sobre() {
               </p>
             </div>
             <div className="relative">
-              <img 
+              <Image
                 src="https://placehold.net/600x600.png"
                 alt="Lorem ipsum"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
