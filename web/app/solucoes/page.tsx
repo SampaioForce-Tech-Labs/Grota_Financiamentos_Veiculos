@@ -45,10 +45,11 @@ function Solucoes() {
       <BoxHero />
       <section className="py-16 px-4 max-w-7xl mx-auto">
         <BoxServices/>
-        {/* Newsletter Section */}
-       <BoxNewsletter/>
+        
         {/* Testimonials Section */}
         <BoxTestimonials/>
+        {/* Newsletter Section */}
+       <BoxNewsletter/>
       </section>
       <Footer />
       <ModalContainer {...modalManager} />
