@@ -1,58 +1,127 @@
-// Gestão de Veículos - Cadastro, consulta, histórico
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { useVeiculos } from "@/src/application/core/hooks/useData";
+import {
+  useVeiculoForm,
+  useVeiculoFilters,
+} from "@/src/presentation/layout/pages/area-logista/veiculos/hooks";
+import {
+  VeiculosStats,
+  VeiculosSearch,
+  VeiculoFormComponent,
+  VeiculosTable,
+} from "@/src/presentation/layout/pages/area-logista/veiculos/components";
+
 export default function VeiculosPage() {
+  const {
+    veiculos,
+    createVeiculo,
+    updateVeiculo,
+    deleteVeiculo,
+    getEstatisticas,
+  } = useVeiculos();
+
+  const [showForm, setShowForm] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const {
+    form,
+    editingVeiculo,
+    resetForm,
+    updateForm,
+    loadVeiculoForEdit,
+    validateForm,
+  } = useVeiculoForm();
+  const { searchTerm, filteredVeiculos, updateSearchTerm, clearFilters } =
+    useVeiculoFilters(veiculos);
+
+  // Evitar erro de hidratação - só renderizar estatísticas no cliente
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const estatisticas = isClient
+    ? getEstatisticas()
+    : {
+        total: 0,
+        disponiveis: 0,
+        vendidos: 0,
+        valorMedio: 0,
+      };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    if (editingVeiculo) {
+      updateVeiculo(editingVeiculo, form);
+      resetForm();
+    } else {
+      createVeiculo(form);
+      resetForm();
+    }
+
+    setShowForm(false);
+  };
+
+  const handleEdit = (veiculo: any) => {
+    loadVeiculoForEdit(veiculo);
+    setShowForm(true);
+  };
+
+  const handleDelete = (id: string) => {
+    if (confirm("Tem certeza que deseja excluir este veículo?")) {
+      deleteVeiculo(id);
+    }
+  };
+
+  const handleCancel = () => {
+    setShowForm(false);
+    resetForm();
+  };
+
   return (
-    <div className="p-4 md:p-8 max-w-7xl space-y-8">
-      <h1 className="text-3xl font-bold mb-4">Gestão de Veículos</h1>
-      {/* Cadastro de veículo */}
-      <div className="bg-white rounded-xl shadow p-6 mb-8">
-        <h2 className="font-semibold mb-2">Cadastrar Novo Veículo</h2>
-        <form className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <input className="border rounded p-2" placeholder="Marca" />
-          <input className="border rounded p-2" placeholder="Modelo" />
-          <input className="border rounded p-2" placeholder="Ano" />
-          <input className="border rounded p-2" placeholder="Valor" />
-          <button className="col-span-1 md:col-span-4 bg-primary text-white rounded p-2 mt-2">
-            Cadastrar
-          </button>
-        </form>
+    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold">Gestão de Veículos</h1>
+        <button
+          onClick={() => setShowForm(!showForm)}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+        >
+          {showForm ? "Cancelar" : "+ Novo Veículo"}
+        </button>
       </div>
-      {/* Consulta de veículos cadastrados */}
-      <div className="bg-white rounded-xl shadow p-6 mb-8">
-        <h2 className="font-semibold mb-2">Veículos Cadastrados</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="p-2">Marca</th>
-                <th className="p-2">Modelo</th>
-                <th className="p-2">Ano</th>
-                <th className="p-2">Valor</th>
-                <th className="p-2">Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="p-2">Fiat</td>
-                <td className="p-2">Uno</td>
-                <td className="p-2">2020</td>
-                <td className="p-2">R$ 35.000</td>
-                <td className="p-2">
-                  <button className="text-primary">Ver histórico</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      {/* Histórico de financiamentos */}
-      <div className="bg-white rounded-xl shadow p-6">
-        <h2 className="font-semibold mb-2">
-          Histórico de Financiamentos do Veículo
-        </h2>
-        <div className="h-24 flex items-center justify-center text-muted-foreground">
-          [Tabela de financiamentos]
-        </div>
-      </div>
+
+      {/* Estatísticas */}
+      <VeiculosStats estatisticas={estatisticas} />
+
+      {/* Formulário */}
+      {showForm && (
+        <VeiculoFormComponent
+          form={form}
+          editingVeiculo={editingVeiculo}
+          onSubmit={handleSubmit}
+          onChange={updateForm}
+          onCancel={handleCancel}
+        />
+      )}
+
+      {/* Busca */}
+      <VeiculosSearch
+        searchTerm={searchTerm}
+        onSearchChange={updateSearchTerm}
+        onClear={clearFilters}
+      />
+
+      {/* Lista de Veículos */}
+      {isClient && (
+        <VeiculosTable
+          veiculos={filteredVeiculos}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+      )}
     </div>
   );
 }

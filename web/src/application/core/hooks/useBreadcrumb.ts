@@ -10,6 +10,7 @@ interface UseBreadcrumbProps {
 
 export function useBreadcrumb({ items, title }: UseBreadcrumbProps) {
   const { setBreadcrumb, setPageTitle } = useHeader();
+
   useEffect(() => {
     setBreadcrumb(items);
     if (title) {

@@ -18,21 +18,21 @@ export const sidebarMenu = [
       { text: "Relatórios", href: "/relatorios" },
     ],
   },
-  {
-    title: "Comissões",
-    icon: DollarSign,
-    items: [{ text: "Comissões e Repasse", href: "/comissoes" }],
+   {
+    title: "Financiamentos",
+    icon: Calculator,
+    items: [
+      { text: "Todos", href: "/financiamentos" },
+      { text: "Simulação", href: "/simulacao" },
+    ],
   },
-  {
-    title: "Notificações",
-    icon: Bell,
-    items: [{ text: "Notificações e Alertas", href: "/notificacoes" }],
-  },
-  {
+   {
     title: "Veículos",
     icon: Car,
     items: [{ text: "Gestão de Veículos", href: "/veiculos" }],
   },
+
+ 
   {
     title: "Clientes",
     icon: Users,
@@ -42,12 +42,20 @@ export const sidebarMenu = [
     ],
   },
   {
-    title: "Financiamentos",
-    icon: Calculator,
-    items: [
-      { text: "Todos", href: "/financiamentos" },
-      { text: "Simulação", href: "/simulacao" },
-    ],
+    title: "Vendedores",
+    icon: Users,
+    items: [{ text: "Lista de Vendedores", href: "/vendedores" }],
+  },
+  {
+    title: "Comissões",
+    icon: DollarSign,
+    items: [{ text: "Comissões e Repasse", href: "/comissoes" }],
+  },
+ 
+   {
+    title: "Notificações",
+    icon: Bell,
+    items: [{ text: "Notificações e Alertas", href: "/notificacoes" }],
   },
   {
     title: "Configurações",
